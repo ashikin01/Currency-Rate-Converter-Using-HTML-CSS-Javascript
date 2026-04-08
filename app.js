@@ -11,9 +11,9 @@ for (const s of select) {
     option.innerText=`${country_code}`;
     s.append(option);
 
-    if(s.name==="from" && country_code==="BDT" ){
+    if(s.name==="from" && country_code==="USD" ){
         option.selected="selected";
-    }else if(s.name==="to" && country_code==="USD" ){
+    }else if(s.name==="to" && country_code==="BDT" ){
         option.selected="selected";
     }
 }
@@ -21,7 +21,10 @@ for (const s of select) {
     s.addEventListener("change",(e)=>{
         let country_name=countryList[e.target.value];
         imageAdd(country_name, e.target);
+        getResult();
     })
+
+
 
 }
 
@@ -40,21 +43,43 @@ let from_select=document.querySelector(".from select")
 
 let to_select=document.querySelector(".to select")
 
+let show_result=document.querySelector(".result");
 
-
-form.addEventListener("submit",async(event)=>{
-    event.preventDefault();
-
+async function getResult() {
     
-    let input_value=input.value;
+let input_value;
+
+    if(input.value == "" || input.value < 1){
+        input.value=1;
+        input_value=input.value;
+    }else input_value=input.value;
+    
     let from_select_value=from_select.value;
     let to_select_value=to_select.value;
 
-    let currency_api_url = `https://api.frankfurter.dev/v2/rates?base=${from_select_value}&quotes=${to_select_value},GBP`;
+    let currency_api_url = `https://api.frankfurter.dev/v2/rates?base=${from_select_value}&quotes=${to_select_value}`;
+    console.log(currency_api_url);
     let response= await fetch(currency_api_url);
-    // let response_json=response.json();
-    // console.log(response_json.Array[1]);
+    let response_json=await response.json();
+    let rate=response_json[0].rate;
+    let result= rate * input_value;
+    show_result.innerText= `${input.value} ${from_select.value} = ${result} ${to_select.value}`;
+}
+
+
+form.addEventListener("submit",(event)=>{
+    event.preventDefault();
+
+    getResult();
     
 })
+
+
+window.addEventListener("load", ()=>{
+    getResult();
+})
+
+
+
 
 
