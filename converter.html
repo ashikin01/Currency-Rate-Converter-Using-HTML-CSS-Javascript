@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Converter</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Currency Converter</h1>
+
+      <form action="">
+        <label for="input">Enter Amount:</label> <br />
+        <input type="number" id="input" value="100" />
+
+        <div class="conversion_section">
+          <div class="from">
+            <div class="from_up">From</div>
+            <div class="from_low">
+              <img src="https://flagsapi.com/BD/flat/64.png" alt="flag_from" />
+
+              <select name="from">
+                
+              </select>
+            </div>
+          </div>
+          
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+          <div class="to">
+            <div class="to_up">To</div>
+            <div class="to_low">
+              <img src="https://flagsapi.com/US/flat/64.png" alt="flag_from" />
+
+              <select name="to">
+                
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <p class="result"></p>
+        
+        <button>Convert</button>
+      </form>
+    </div>
+
+    <script src="./code.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
